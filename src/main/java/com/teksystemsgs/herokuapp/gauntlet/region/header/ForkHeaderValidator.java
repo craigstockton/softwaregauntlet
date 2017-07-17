@@ -1,6 +1,7 @@
 package com.teksystemsgs.herokuapp.gauntlet.region.header;
 
 import com.softwareonpurpose.validator4test.Validator;
+import com.teksystemsgs.herokuapp.gauntlet.region.image.SiteImageValidator;
 
 public class ForkHeaderValidator extends Validator {
     private static final String DESCRIPTION = "'Fork Header' region";
@@ -11,6 +12,7 @@ public class ForkHeaderValidator extends Validator {
         super(DESCRIPTION, expected, actual, parent);
         this.expected = expected;
         this.actual = actual;
+        addChildValidator(SiteImageValidator.getInstance(expected.inImage(), actual.inImage(), this));
     }
 
     public static ForkHeaderValidator getInstance(ForkHeaderExpected expected, ForkHeader actual, Validator parent) {
@@ -19,7 +21,6 @@ public class ForkHeaderValidator extends Validator {
 
     @Override
     protected void executeVerifications() {
-        verify("'Fork me' image", expected.getForkMeSource(), actual.getForkMeSource());
         verify("'Fork me' href", expected.getForkMeHref(), actual.getForkMeHref());
     }
 }

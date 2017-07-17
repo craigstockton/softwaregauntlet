@@ -9,6 +9,9 @@ public class AbTestingTest extends GauntletTest{
     public void smoke(){
         AbTestingExpected expected = AbTestingExpected.getInstance();
         AbTesting actual = AbTesting.directNav();
+        if(actual.inContent().getHeading().contains("Variation")){
+            expected.inContent().setHeadingVariation(true);
+        }
         confirm(AbTestingValidator.getInstance(expected, actual).validate());
     }
 }

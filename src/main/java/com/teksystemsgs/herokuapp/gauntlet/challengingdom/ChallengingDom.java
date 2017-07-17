@@ -1,30 +1,30 @@
-package com.teksystemsgs.herokuapp.gauntlet.abtesting;
+package com.teksystemsgs.herokuapp.gauntlet.challengingdom;
 
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiView;
-import com.teksystemsgs.herokuapp.gauntlet.abtesting.content.AbTestingContent;
+import com.teksystemsgs.herokuapp.gauntlet.challengingdom.content.ChallengingDomContent;
 import com.teksystemsgs.herokuapp.gauntlet.environment.Environment;
 import com.teksystemsgs.herokuapp.gauntlet.region.footer.Footer;
 import com.teksystemsgs.herokuapp.gauntlet.region.header.ForkHeader;
 
-public class AbTesting extends UiView implements AbTestingValidatable {
-    private static final String RELATIVE_URI = "abtest";
+public class ChallengingDom extends UiView implements ChallengingDomValidatable {
+    private static final String RELATIVE_URI = "challenging_dom";
     private static final String VIEW_URI = String.format("%s/%s", Environment.getInstance().getDomainUri(), RELATIVE_URI);
-    private static final String DESCRIPTION = "'A/B Testing' view";
+    private static final String DESCRIPTION = "'Challenging DOM' view";
     private static final String locatorType = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VALUE = "body";
 
-    private AbTesting() {
+    private ChallengingDom() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, locatorType, LOCATOR_VALUE));
     }
 
-    static AbTesting directNav() {
-        new AbTesting().load();
-        return AbTesting.expect();
+    static ChallengingDom directNav() {
+        new ChallengingDom().load();
+        return ChallengingDom.expect();
     }
 
-    private static AbTesting expect() {
-        AbTesting view = new AbTesting();
+    private static ChallengingDom expect() {
+        ChallengingDom view = new ChallengingDom();
         view.confirmElementStates();
         return view;
     }
@@ -36,13 +36,23 @@ public class AbTesting extends UiView implements AbTestingValidatable {
     }
 
     @Override
+    public String getHeading() {
+        return UiElement.getInstance("Heading", UiElement.LocatorType.TAG, "h3").getText();
+    }
+
+    @Override
+    public String getContentDescription() {
+        return UiElement.getInstance("Description", UiElement.LocatorType.TAG, "p").getText();
+    }
+
+    @Override
     public ForkHeader inHeader() {
         return ForkHeader.getInstance(this.getElement());
     }
 
     @Override
-    public AbTestingContent inContent() {
-        return AbTestingContent.getInstance(this.getElement());
+    public ChallengingDomContent inContent() {
+        return ChallengingDomContent.getInstance(this.getElement());
     }
 
     @Override

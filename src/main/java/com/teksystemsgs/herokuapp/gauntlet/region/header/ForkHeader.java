@@ -2,6 +2,7 @@ package com.teksystemsgs.herokuapp.gauntlet.region.header;
 
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiRegion;
+import com.teksystemsgs.herokuapp.gauntlet.region.image.SiteImage;
 
 public class ForkHeader extends UiRegion implements ForkHeaderValidatable {
     private static final String DESCRIPTION = "'Fork Header' region";
@@ -29,6 +30,11 @@ public class ForkHeader extends UiRegion implements ForkHeaderValidatable {
     @Override
     public String getForkMeHref() {
         return getForkMeLinkElement().getHref();
+    }
+
+    @Override
+    public SiteImage inImage() {
+        return SiteImage.getInstance(1, this.getElement());
     }
 
     private UiElement getForkMeLinkElement() {
