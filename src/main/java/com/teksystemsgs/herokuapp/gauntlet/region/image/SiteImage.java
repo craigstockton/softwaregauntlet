@@ -26,9 +26,15 @@ public class SiteImage extends UiRegion implements SiteImageValidatable {
 
     @Override
     public Boolean exists() {
-        Response response = ClientBuilder.newBuilder().build().target(getSource()).request().get();
-        Integer value = response.getStatus();
-        response.close();
-        return value.equals(200);
+        Integer status = 999;
+        try {
+            Response response = ClientBuilder.newBuilder().build().target(getSource()).request().get();
+            status = response.getStatus();
+            response.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return status.equals(200);
     }
 }
